@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>FORMULARZ ZGŁOSZENIA WNIOSKU</h1>
+    <h2>PODSUMOWANIE WNIOSKU</h2>
+    <h3>Numer wniosku: {{ project.id }}</h3>
+    <p>Wnioskodawca: {{ originator.name }}</p>
+    <p>Telefon kontaktowy: {{ originator.phone }}</p>
+    <p>Adres e-mail do kontaktu: {{ originator.email }}</p><br>
+    <p>Tytuł projektu: {{ project.name }}</p>
+    <p>Data rozpoczęcia projektu: {{ project.start_date.isoformat }}.
+        Data zakończenia projektu: {{ project.end_date.isoformat }}
+    </p>
+    <p>Region: {{ project.get_region_display }}</p>
+    <p>Dziedzina tematyczna: {{ project.get_subject_display }}</p>
+    <p>Skrócony opis projektu: {{ project.description_short }}</p>
+    <p>Opis projektu: {{ project.description_long }}</p>
+    <table>
+    <tr>
+        <th>Nazwa kosztu</th>
+        <th>Koszt z dotacji (w zł)</th>
+        <th>Finansowanie z innych źródeł (w zł)</th>
+        <th>Suma kosztu (w zł)</th>
+    </tr>
+    {% for cost in costs %}
+    <tr>
+        <td>{{ cost.cost_name }}</td>
+        <td>{{ cost.grant_cost }}</td>
+        <td>{{ cost.other_cost }}</td>
+        <td>{{ cost.whole_cost }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+    <p>Suma kosztów z dotacji: {{ grant_total_cost }}</p>
+    <p>Suma kosztów z pozostałych źródeł: {{ other_total_cost }}</p>
+    <p>CAŁKOWITY KOSZT PROJEKTU: {{ total_cost }}</p>
+
+    <form method="post" action="{% url 'summary_view' %}">{% csrf_token %}
+        <input name="originator_id" type="hidden" value="{{ originator.id }}">
+    <button name="action" value="apply">Złóż wniosek</button>
+    </form>
+    <form method="post" action="{% url 'summary_view' %}">{% csrf_token %}
+        <input name="originator_id" type="hidden" value="{{ originator.id }}">
+    <button name="action" value="back">Wstecz</button>
+    </form>
+
+
+
+{% endblock %}

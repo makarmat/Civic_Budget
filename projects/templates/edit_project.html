@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>FORMULARZ ZGŁOSZENIA WNIOSKU</h1>
+    <h2>DANE ZGŁASZAJĄCEGO WNOSEK</h2>
+    <form action="{% url 'edit_project' %}" method="post">{% csrf_token %}
+    {{ form.as_p }}
+        <input name="originator_id" type="hidden" value="{{ originator.id }}">
+    <input type="submit" value="Dalej">
+    </form>
+
+{% endblock %}

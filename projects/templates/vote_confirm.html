@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Oddałeś głos na projekt:</h2>
+    <ul>
+    {% for vote in vote_list %}
+    <li>{{ vote }}</li>
+    {% endfor %}
+    </ul>
+    <br>
+    <a href="{% url 'projects' %}">Lista projektów</a>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>FORMULARZ GŁOSOWANIA</h1>
+    <h2>WYBIERZ PROJEKTY, NA KTÓRE CHCESZ ZAGŁOSOWAĆ</h2>
+    <form action="{% url 'vote' %}" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Głosuj">
+    </form>
+
+{% endblock %}
