@@ -1,4 +1,4 @@
-Django==2.2.5
+Django==2.2.13
 django-bootstrap-daterangepicker==1.0.4
 pkg-resources==0.0.0
 psycopg2-binary==2.8.3
